@@ -4,376 +4,480 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aina Elegant Profile</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* CSS RESET & BASE */
 *{margin:0;padding:0;box-sizing:border-box;}
-
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#0f0f0f,#1a1a1a,#000);
-  color:white;
+  background: radial-gradient(circle at 80% 20%, #1a0b12, #0c0c11 60%, #050508 100%);
+  color:#f1f1f6;
   display:flex;
-  height:100vh;
-  overflow:hidden;
-}
-
-/* SIDEBAR */
-.sidebar{
-  width:260px;
-  background:rgba(255,20,147,0.1);
-  backdrop-filter:blur(12px);
-  padding:25px;
-  border-right:1px solid rgba(255,255,255,0.1);
-  display: flex;
   flex-direction: column;
+  min-height:100vh;
+  overflow-x:hidden;
+  position: relative;
 }
 
-.sidebar h2{
-  text-align:center;
-  margin-bottom:25px;
-  color:#ff69b4;
-  letter-spacing: 2px;
+/* KELAS KHUSUS UNTUK TULISAN PINK */
+.pink-text {
+  color: #fbc2eb;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(251, 194, 235, 0.3);
 }
 
-.sidebar a{
-  display:block;
-  padding:12px;
-  margin:8px 0;
-  border-radius:10px;
-  cursor:pointer;
-  transition:0.3s;
-  text-decoration: none;
-  color: rgba(255,255,255,0.7);
+/* ELEGANT DIAMOND DUST CANVAS */
+#sparkle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.sidebar a:hover,
-.sidebar a.active{
-  background:#ff1493;
-  color:white;
-  transform:translateX(6px);
-  box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
-}
-
-/* CONTENT AREA */
-.content{
-  flex:1;
-  padding:40px;
-  overflow-y:auto;
-  scroll-behavior: smooth;
-}
-
-/* CARD SYSTEM */
-.card{
-  display:none;
-  background:rgba(255,255,255,0.03);
-  border-radius:20px;
-  padding:30px;
-  text-align:center;
-  backdrop-filter:blur(15px);
-  box-shadow:0 10px 40px rgba(255,20,147,0.15);
-  animation:fade 0.6s ease-out;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.active{display:block;}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* PROFILE IMAGE */
-img{
-  width:140px;
-  height:140px;
-  object-fit:cover;
-  border-radius:50%;
-  border:3px solid #ff1493;
-  box-shadow:0 0 25px rgba(255, 20, 147, 0.5);
-  margin-bottom:15px;
-}
-
-h1{ color:#ff69b4; margin-bottom:10px; }
-
-/* BIODATA BOX */
-.biodata-text {
-  text-align: left;
-  margin: 20px auto;
-  max-width: 500px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 15px;
-  line-height: 2;
-  border-left: 4px solid #ff1493;
-}
-
-/* EDUCATION GRID & MAPS */
-.edu-item {
-  background: rgba(255,255,255,0.05);
-  border-radius: 15px;
-  padding: 15px;
-  margin-bottom: 25px;
-  transition: 0.3s;
-}
-
-.edu-item:hover {
-  background: rgba(255,255,255,0.08);
-}
-
-.edu-item h3 { color: #ff69b4; margin-bottom: 10px; }
-
-.map-frame {
+/* NAVBAR */
+.navbar {
   width: 100%;
-  height: 150px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 20, 147, 0.3);
+  background: rgba(12, 12, 17, 0.8);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  padding: 22px 50px;
+  border-bottom: 1px solid rgba(255, 182, 193, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar h2 { 
+  font-size: 1.55rem; 
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 12px; }
+.navbar a {
+  padding: 10px 22px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+.navbar a:hover, .navbar a.active {
+  background: rgba(251, 194, 235, 0.1);
+  color: #fbc2eb;
+  box-shadow: 0 0 15px rgba(251, 194, 235, 0.08);
+}
+
+/* CONTENT CONTAINER */
+.content { 
+  flex: 1; 
+  padding: 70px 20px 40px 20px; 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  z-index: 10;
+}
+
+/* GLASSMORPHISM CARDS */
+.card {
+  display: none;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(15, 15, 22, 0.45) 70%, rgba(251, 194, 235, 0.02));
+  border-radius: 32px;
+  padding: 55px 50px;
+  text-align: center;
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: smoothReveal 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  border: 1px solid rgba(251, 194, 235, 0.15);
+  width: 100%;
+  max-width: 880px;
   margin-top: 10px;
 }
+.card.active { display: block; }
 
-/* SKILLS */
-.skill{ margin:15px 0; text-align:left; }
-.bar{ background:#222; border-radius:20px; overflow:hidden; }
-.fill{ height:10px; background:linear-gradient(90deg,#ff1493,#ff69b4); }
-
-/* GRID PROJECTS */
-.grid-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  margin-top:20px;
+@keyframes smoothReveal { 
+  from { opacity: 0; transform: translateY(20px); } 
+  to { opacity: 1; transform: translateY(0); } 
 }
 
-.box{
-  background:rgba(255,255,255,0.05);
-  padding:25px;
-  border-radius:15px;
-  border:1px solid rgba(255,255,255,0.1);
-  transition: 0.3s;
+/* FOOTER STYLING */
+.footer-text {
+  margin-top: 45px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 1px;
+  font-weight: 300;
+  transition: all 0.3s ease;
+}
+.footer-text span {
+  color: rgba(251, 194, 235, 0.5);
+  font-weight: 400;
+}
+.footer-text:hover {
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.box:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 20px #ff1493;
+/* AVATAR */
+img {
+  width: 155px; height: 155px; object-fit: cover; border-radius: 50%;
+  border: 3px solid rgba(251, 194, 235, 0.6); 
+  box-shadow: 0 0 35px rgba(251, 194, 235, 0.25);
+  margin-bottom: 30px;
+  transition: transform 0.4s ease;
 }
+img:hover { transform: scale(1.03); }
 
-/* BUTTONS */
-button{
-  margin-top:20px;
-  padding:12px 30px;
-  border:none;
-  background:linear-gradient(45deg,#ff1493,#ff69b4);
-  color:white;
-  border-radius:25px;
-  cursor:pointer;
+h1 { 
+  font-size: 2.25rem;
   font-weight: 600;
-  transition:0.3s;
+  margin-bottom: 14px; 
+  letter-spacing: -0.2px;
+  background: linear-gradient(135deg, #ffffff 40%, #fbc2eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+p.subtitle {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.12rem;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  margin-bottom: 38px;
 }
 
-button:hover{ transform:scale(1.05); box-shadow:0 0 15px #ff1493; }
+/* BIODATA */
+.biodata-text {
+  text-align: left; 
+  margin: 35px auto; 
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  padding: 35px; 
+  border-radius: 24px; 
+  line-height: 2.1; 
+  border-left: 4px solid #ff69b4;
+  font-size: 1.02rem;
+  color: #e2e2e9;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+.biodata-text b { color: #fbc2eb; font-weight: 500; }
 
-/* SPARKLE ANIMATION */
-.sparkle{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:#ff69b4;
-  border-radius:50%;
-  pointer-events: none;
-  animation:spark 3s linear infinite;
+/* GRID LAYOUTS */
+.grid-container { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+  gap: 32px; 
+  margin-top: 40px; 
+}
+.edu-item, .box { 
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.005));
+  border-radius: 24px; 
+  padding: 35px; 
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+.edu-item:hover, .box:hover { 
+  transform: translateY(-6px); 
+  border-color: rgba(251, 194, 235, 0.35);
+  box-shadow: 0 20px 40px rgba(251, 194, 235, 0.12); 
+  background: rgba(255, 255, 255, 0.04);
+}
+.edu-item h3, .box h3 {
+  color: #fbc2eb;
+  font-size: 1.32rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+.edu-item p.level {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.edu-item p.desc, .box p {
+  color: #c9c9d1;
+  font-size: 0.95rem;
+  line-height: 1.75;
 }
 
-@keyframes spark{
-  0%{opacity:0;transform:translateY(0);}
-  50%{opacity:1;}
-  100%{opacity:0;transform:translateY(-100px);}
+/* MAP EMBED */
+.map-frame {
+  width: 100%; height: 185px; border-radius: 14px;
+  border: 1px solid rgba(251, 194, 235, 0.15); margin-top: 20px;
 }
 
-/* SOCIAL BUTTONS */
-.btn{
-  display:block;
-  margin:10px auto;
-  width:250px;
-  padding:12px;
-  border-radius:25px;
-  text-decoration:none;
-  color:white;
-  font-weight:600;
-  transition:0.3s;
+/* SKILL SETS */
+.skill-container { max-width: 580px; margin: 35px auto; }
+.skill { margin: 26px 0; text-align: left; }
+.skill p { margin-bottom: 12px; font-weight: 400; display: flex; justify-content: space-between; font-size: 1.02rem; }
+.skill span { color: #ff69b4; font-weight: 500; }
+.bar { background: rgba(255, 255, 255, 0.05); border-radius: 20px; height: 10px; overflow: hidden; }
+.fill { height: 100%; background: linear-gradient(90deg, #ff69b4, #fbc2eb); border-radius: 20px; width: 0%; transition: width 1.2s cubic-bezier(0.1, 1, 0.1, 1); }
+
+/* ULTRA ELEGANT NEXT BUTTON WITH PINK ACCENT */
+button.btn-next {
+  margin-top: 40px; padding: 15px 45px; 
+  border: 1px solid rgba(255, 105, 180, 0.5);
+  background: transparent;
+  color: #ff69b4; border-radius: 35px; cursor: pointer; font-weight: 600; font-size: 1rem;
+  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 0 15px rgba(255, 20, 147, 0.1);
 }
-.wa{background:#25D366;}
-.ig{background:#E1306C;}
-.tt{background:#000;}
+button.btn-next:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(255, 20, 147, 0.2), rgba(251, 194, 235, 0.1));
+  color: #ffffff;
+  border-color: rgba(255, 20, 147, 0.8);
+  box-shadow: 0 0 25px rgba(255, 20, 147, 0.35);
+}
+
+/* CONTACT LINK BUTTONS */
+.social { margin-top: 40px; display: flex; flex-direction: column; gap: 18px; }
+.social a.btn { 
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  margin: 0 auto; width: 100%; max-width: 340px; padding: 16px; 
+  border-radius: 35px; text-decoration: none; color: white; font-weight: 500; font-size: 1.02rem;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1); 
+  letter-spacing: 0.5px;
+}
+.social a.btn:hover { 
+  transform: translateY(-4px); 
+  filter: brightness(1.1); 
+}
+.wa { background: linear-gradient(135deg, #1b7a42, #128C7E); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2); }
+.ig { background: linear-gradient(45deg, #9b3d22, #b81f57, #7e125c); box-shadow: 0 6px 20px rgba(225, 48, 108, 0.2); }
+.tt { background: linear-gradient(135deg, #0f0f14, #1b1b22); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+
+/* RESPONSIVE MEDIA */
+@media (max-width: 768px) {
+  .navbar { padding: 16px 24px; flex-direction: column; gap: 16px; }
+  .nav-links { flex-wrap: wrap; justify-content: center; }
+  .navbar a { font-size: 0.82rem; padding: 8px 16px; }
+  .content { padding: 35px 15px; }
+  .card { padding: 42px 28px; }
+  h1 { font-size: 1.95rem; }
+}
 </style>
 </head>
-
 <body>
 
-<div class="sidebar">
-  <h2>💗 Nana</h2>
-  <a onclick="showPage('beranda',this)" id="link-beranda" class="active">Beranda</a>
-  <a onclick="showPage('tentang',this)" id="link-tentang">Tentang</a>
-  <a onclick="showPage('pendidikan',this)" id="link-pendidikan">Pendidikan</a>
-  <a onclick="showPage('keahlian',this)" id="link-keahlian">Keahlian</a>
-  <a onclick="showPage('projek',this)" id="link-projek">Projek</a>
-  <a onclick="showPage('kontak',this)" id="link-kontak">Kontak</a>
+<canvas id="sparkle-container"></canvas>
+
+<div class="navbar">
+  <h2>Nana 🎀</h2>
+  <div class="nav-links">
+    <a onclick="showPage('beranda',this)" id="link-beranda" class="active">Beranda</a>
+    <a onclick="showPage('tentang',this)" id="link-tentang">Tentang</a>
+    <a onclick="showPage('pendidikan',this)" id="link-pendidikan">Pendidikan</a>
+    <a onclick="showPage('keahlian',this)" id="link-keahlian">Keahlian</a>
+    <a onclick="showPage('projek',this)" id="link-projek">Projek</a>
+    <a onclick="showPage('kontak',this)" id="link-kontak">Kontak</a>
+  </div>
 </div>
 
 <div class="content">
-
   <div id="beranda" class="card active">
-    <img src="foto.jpg"  alt="Foto Nana">
+    <img src="foto.jpg" alt="Foto Profil">
     <h1>Noor Qurratul Aina</h1>
-    <p>universitas jabal ghafur, pidie </p>
-    <button onclick="showPage('tentang')">Masuk →</button>
+    <p class="subtitle"><span class="pink-text">Informatics</span> Student at <span class="pink-text">Universitas Jabal Ghafur</span></p>
+    <button class="btn-next" onclick="showPage('tentang')">Eksplorasi Profil →</button>
   </div>
 
-<div id="tentang" class="card">
+  <div id="tentang" class="card">
     <h1>Tentang Saya</h1>
-    <div class="grid-container" style="text-align: left; align-items: start;">
-      
-      <div class="biodata-text" style="margin: 0; max-width: 100%;">
-        ✨ <b>Nama:</b> Noor Qurratul Aina<br>
-        📅 <b>Tgl Lahir:</b> 21 September 2006<br>
-        🏠 <b>Alamat:</b> Lueng Putu, Pidie Jaya, Aceh<br>
-        🎓 <b>Status:</b> Mahasiswa Teknik Informatika
-        <p style="margin-top: 15px; line-height: 1.5; font-size: 0.9em; color: rgba(255,255,255,0.8);">
-          Saya menyukai desain web dan terus belajar teknologi baru untuk menciptakan pengalaman digital yang menarik.
-        </p>
-      </div>
-
-      <div class="edu-item" style="margin-bottom: 0;">
-        <h3 style="font-size: 1.1em; margin-bottom: 5px;">📍 Lokasi Saya</h3>
-        <p style="font-size: 0.8em; margin-bottom: 10px;">Lueng Putu, Pidie Jaya</p>
-        <iframe 
-          class="map-frame" 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15886.13628186175!2d96.1436445!3d5.4875323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3040379201537231%3A0x6334643c16a3a985!2sLueng%20Putu%2C%20Bandar%20Baru%2C%20Kabupaten%20Pidie%20Jaya%2C%20Aceh!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid" 
-          style="height: 200px;" 
-          allowfullscreen="" 
-          loading="lazy">
-        </iframe>
-      </div>
-
+    <div class="biodata-text">
+      ✨ <b>Nama Lengkap:</b> Noor Qurratul Aina<br>
+      📅 <b>Tanggal Lahir:</b> <span class="pink-text">21 September 2006</span><br>
+      🏠 <b>Alamat:</b> <span class="pink-text">Lueng Putu, Pidie Jaya, Aceh</span><br>
+      <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15886.72!2d96.060!3d5.255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3040970077526c4b%3A0xd42b694e5f7cf4f4!2sLueng%20putu!5e0!3m2!1sid!2sid!4v1234567890" allowfullscreen="" loading="lazy"></iframe><br>
+      🎓 <b>Status Akademik:</b> Mahasiswa Aktif <span class="pink-text">Teknik Informatika</span>
     </div>
-    <button onclick="showPage('pendidikan')" style="margin-top: 30px;">Next →</button>
+    <button class="btn-next" onclick="showPage('pendidikan')">Riwayat Pendidikan →</button>
   </div>
 
   <div id="pendidikan" class="card">
     <h1>Riwayat Pendidikan</h1>
     <div class="grid-container">
-      
       <div class="edu-item">
         <h3>MIN 7 Bandar Baru</h3>
-        <p>~sekolah dasar~</p>
-        <p>langkah pertama dalam dunia pendidikan formal. di sinilah semua cerita dan mimpi di mulai.</p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0!2d96.1!3d5.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMTgnMDAuMCJOIDk2wrAwNicwMC4wIkU!5e0!3m2!1sid!2sid!4v123456789" allowfullscreen="" loading="lazy"></iframe>
+        <p class="level">Pendidikan Dasar</p>
+        <p class="desc">Awal mula dalam meniti perjalanan akademik. Di sinilah minat belajar dan dasar <span class="pink-text">kreativitas</span> mulai terbentuk secara konsisten.</p>
+        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.6!2d96.044!3d5.241!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3040964adeb8f057%3A0x9aada79f8b2c9a9c!2sSMP%20Negeri%207%20Bandar%20Baru!5e0!3m2!1sid!2sid!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
       </div>
-
       <div class="edu-item">
-        <h3>SMPS Daruss'adah</h3>
-        <p>~Sekolah dasar menengah~</p>
-        <p>saya melanjutkan pendidikan ke pesantren. dan di masa-masa itulah saya membentuk karakter dan kepribadian diri.</p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0!2d96.15!3d5.32!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMTknMDAuMCJOIDk2wrAwOScwMC4wIkU!5e0!3m2!1sid!2sid!4v123456789" allowfullscreen="" loading="lazy"></iframe>
+        <h3>SMPS Darussa'adah</h3>
+        <p class="level">Sekolah Menengah Pertama</p>
+        <p class="desc">Menempuh pendidikan di lingkungan <span class="pink-text">pesantren</span> yang melatih pembentukan karakter mandiri dan kedisiplinan yang tinggi.</p>
+        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.6!2d96.042!3d5.251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30409646648763d5%3A0x8d48d19796b07e4e!2sSMA%20Darussa'adah%20Teupin%20Raya!5e0!3m2!1sid!2sid!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
       </div>
-
       <div class="edu-item">
         <h3>SMAS Tautiah Arongan</h3>
-        <p>~Sekolah Menengah Atas~</p>
-        <p>dan saya melanjutkan lagi pendidikan ke pesantren yang lebih tinggi guna menambah wawasan,dan mempersiapkan diri untuk masa depan yang lebih baik. </p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0!2d96.08!3d5.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMTcnMDAuMCJOIDk2wrAwNScwMC4wIkU!5e0!3m2!1sid!2sid!4v123456789" allowfullscreen="" loading="lazy"></iframe>
+        <p class="level">Sekolah Menengah Atas</p>
+        <p class="desc">Melanjutkan pendidikan ke jenjang menengah atas berbasis pesantren demi memperluas <span class="pink-text">khazanah keilmuan</span> dan mempersiapkan masa depan yang matang.</p>
+        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.8!2d96.378!3d5.198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3043b300457e6ded%3A0x284c19a2a9f636f1!2sSMA%20Swasta%20Tauthiah%20Arongan!5e0!3m2!1sid!2sid!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
       </div>
-
       <div class="edu-item">
-        <h3>Univ. Jabal Ghafur</h3>
-        <p>~Perguruan Tinggi (Teknik Informatika)~</p>
-        <p> memulai perjalanan baru dalam dunia perkuliahan, dan aktif dalam kegiatan organisasi seperti sanggar,dan aubade. dan saya juga mengembangkan kemampuan dalmbidang informatika dan teknologi.</p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.2166!2d95.9529!3d5.3783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30403759796e6d01%3A0x47f2022722b51239!2sUniversitas%20Jabal%20Ghafur!5e0!3m2!1sid!2sid!4v1620000000000" allowfullscreen="" loading="lazy"></iframe>
+        <h3>Universitas Jabal Ghafur</h3>
+        <p class="level">Pendidikan Tinggi — <span class="pink-text">Teknik Informatika (S1)</span></p>
+        <p class="desc">Fase eksplorasi mendalam di bidang <span class="pink-text">teknologi informasi</span>. Berperan aktif dalam bidang desain, serta organisasi Aubade dan Sanggar Seni.</p>
+        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.5!2d95.922!3d5.294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3040923da7076b2f%3A0x75d6dc38097dcb73!2sUniversitas%20Jabal%20Ghafur!5e0!3m2!1sid!2sid!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
       </div>
-
     </div>
-    <button onclick="showPage('keahlian')">Next →</button>
+    <button class="btn-next" onclick="showPage('keahlian')">Lihat Kompetensi →</button>
   </div>
 
   <div id="keahlian" class="card">
-    <h1>Keahlian</h1>
-    <div class="skill"><p>HTML</p><div class="bar"><div class="fill" style="width:90%"></div></div></div>
-    <div class="skill"><p>CSS</p><div class="bar"><div class="fill" style="width:85%"></div></div></div>
-    <div class="skill"><p>JavaScript</p><div class="bar"><div class="fill" style="width:70%"></div></div></div>
-    <button onclick="showPage('projek')">Next →</button>
+    <h1>Keahlian & Kompetensi</h1>
+    <div class="skill-container">
+      <div class="skill">
+        <p><span class="pink-text">HTML</span> <span>90%</span></p>
+        <div class="bar"><div class="fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill">
+        <p><span class="pink-text">CSS</span> <span>85%</span></p>
+        <div class="bar"><div class="fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill">
+        <p><span class="pink-text">JavaScript</span> <span>70%</span></p>
+        <div class="bar"><div class="fill" style="width:70%"></div></div>
+      </div>
+    </div>
+    <button class="btn-next" onclick="showPage('projek')">Kunjungi Projek →</button>
   </div>
 
   <div id="projek" class="card">
-    <h1>Projek Saya</h1>
+    <h1>Portofolio Projek</h1>
     <div class="grid-container">
-      <a href="https://noorqurratulaina-ai.github.io/Keina-Beauty/" target="_blank" style="text-decoration: none; color: inherit;">
+      <a href="https://noorqurratulaina-ai.github.io/Keina-Beauty/" target="_blank" style="text-decoration:none; color:inherit;">
         <div class="box">
-          <h3>menyediakan berbagai kosmetik </h3>
-          <p> keinabeauty🎀💄.</p>
-          <small style="color: #ff69b4;">Lihat Demo →</small>
+          <h3>Keina Beauty 🎀</h3>
+          <p>E-Commerce produk kecantikan yang dirancang dengan antarmuka estetik, responsif, dan mengedepankan pengalaman <span class="pink-text">pengguna</span>.</p>
         </div>
       </a>
-      <div class="box">
-      <a href="https://noorqurratulaina-ai.github.io/healtypoint/" target="_blank" style="text-decoration: none; color: inherit;">
-        <h3>menerima Konsultasi kepada masyarakat umum</h3>
-        <p>kolsultasi secara online🏥.</p>
-      </div>
+      <a href="https://noorqurratulaina-ai.github.io/healtypoint/" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="box">
+          <h3>Healthy Point 🏥</h3>
+          <p>Platform konsultasi kesehatan daring yang menyajikan kemudahan akses informasi medis secara <span class="pink-text">intuitif</span> dan nyaman.</p>
+        </div>
+      </a>
     </div>
-    <button onclick="showPage('kontak')">Next →</button>
+    <button class="btn-next" onclick="showPage('kontak')">Hubungi Saya →</button>
   </div>
 
   <div id="kontak" class="card">
     <h1>Hubungi Saya</h1>
+    <p class="subtitle">Silakan pilih platform di bawah ini untuk <span class="pink-text">berkolaborasi</span> secara instan.</p>
     <div class="social">
-      <a href="https://wa.me/081265030340" target="_blank" class="btn wa">💬 WhatsApp</a>
-      <a href="https://instagram.com/noorqurratulaina__" target="_blank" class="btn ig">📷 Instagram</a>
-      <a href="https://www.tiktok.com/@noorqurratulaina" target="_blank" class="btn tt">🎵 TikTok</a>
+      <a href="https://api.whatsapp.com/send?phone=6281265030340" target="_blank" rel="noopener noreferrer" class="btn wa">💬 WhatsApp</a>
+      <a href="https://www.instagram.com/noorqurratulaina__/" target="_blank" rel="noopener noreferrer" class="btn ig">📷 Instagram</a>
+      <a href="https://www.tiktok.com/@noorqurratulaina" target="_blank" rel="noopener noreferrer" class="btn tt">🎵 TikTok</a>
     </div>
-    <button onclick="showPage('beranda')">Kembali ke Awal</button>
+    <button class="btn-next" onclick="showPage('beranda')">Kembali ke Beranda</button>
   </div>
 
+  <div class="footer-text">
+    @2026 <span class="pink-text">noorqurratulaina</span> portfolio | pidie, aceh
+  </div>
 </div>
 
 <script>
+/* SCRIPT NAVIGASI */
 function showPage(pageId, element) {
-  // 1. Sembunyikan semua card
-  document.querySelectorAll('.card').forEach(card => {
-    card.classList.remove('active');
-  });
-  
-  // 2. Tampilkan card yang dipilih
+  document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
   const targetCard = document.getElementById(pageId);
   if(targetCard) targetCard.classList.add('active');
-
-  // 3. Update status menu di sidebar
-  document.querySelectorAll('.sidebar a').forEach(link => {
-    link.classList.remove('active');
-  });
-
-  // Jika dipicu dari tombol sidebar (element ada)
+  
+  document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
   if(element) {
     element.classList.add('active');
   } else {
-    // Jika dipicu dari tombol "Next" (cari link sidebar yang sesuai)
-    const sidebarLink = document.getElementById('link-' + pageId);
-    if(sidebarLink) sidebarLink.classList.add('active');
+    const navLink = document.getElementById('link-' + pageId);
+    if(navLink) navLink.classList.add('active');
   }
-  
-  // Scroll ke atas otomatis saat ganti halaman
-  document.querySelector('.content').scrollTop = 0;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* Efek Sparkle */
-setInterval(() => {
-  const sparkle = document.createElement("div");
-  sparkle.className = "sparkle";
-  sparkle.style.left = Math.random() * 100 + "%";
-  sparkle.style.top = "95%";
-  document.body.appendChild(sparkle);
-  setTimeout(() => sparkle.remove(), 3000);
-}, 400);
-</script>
+/* CANVAS DIAMOND DUST EFFECT */
+const canvas = document.getElementById("sparkle-container");
+const ctx = canvas.getContext("2d");
 
+let dustParticles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+class DiamondDust {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1.8 + 0.6;
+    this.speedX = (Math.random() * 0.4) - 0.2;
+    this.speedY = -(Math.random() * 0.5 + 0.1);
+    this.opacity = Math.random() * 0.5 + 0.2;
+    this.fade = Math.random() * 0.003 + 0.001;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.opacity -= this.fade;
+
+    if (this.opacity <= 0 || this.y < -10) {
+      this.y = canvas.height + 10;
+      this.x = Math.random() * canvas.width;
+      this.opacity = Math.random() * 0.5 + 0.3;
+    }
+  }
+
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = "rgba(251, 194, 235, 0.7)";
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function init() {
+  dustParticles = [];
+  for (let i = 0; i < 90; i++) {
+    dustParticles.push(new DiamondDust());
+  }
+}
+init();
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < dustParticles.length; i++) {
+    dustParticles[i].update();
+    dustParticles[i].draw();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 </body>
 </html>
