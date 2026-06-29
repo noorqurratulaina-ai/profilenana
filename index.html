@@ -1,379 +1,1005 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aina Elegant Profile</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Log Unigha - Smart Academic System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* CSS RESET & BASE */
-*{margin:0;padding:0;box-sizing:border-box;}
+    /* --- Global Styles & Variables --- */
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #22c55e;
+      --success-hover: #16a34a;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --warning: #ffaa00;
+      --dark-bg: #0f172a;
+      --dark-card: rgba(30, 41, 59, 0.7);
+      --glass-bg: rgba(255, 255, 255, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
 
-body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#0f0f0f,#1a1a1a,#000);
-  color:white;
-  display:flex;
-  height:100vh;
-  overflow:hidden;
-}
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', Arial, sans-serif; }
+    
+    body { 
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+      background-attachment: fixed;
+      color: var(--text-main); 
+      transition: background 0.3s, color 0.3s; 
+      min-height: 100vh;
+      overflow-x: hidden; /* Mencegah melar ke samping */
+    }
+    
+    /* --- Animasi Masuk --- */
+    .card, .stat-box, #certificateBox, .login-box { animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* SIDEBAR */
-.sidebar{
-  width:260px;
-  background:rgba(255,20,147,0.1);
-  backdrop-filter:blur(12px);
-  padding:25px;
-  border-right:1px solid rgba(255,255,255,0.1);
-  display: flex;
-  flex-direction: column;
-}
+    /* --- FIX: Ornamen Background Efek Mengunci (Fixed) --- */
+    .bg-glow {
+      position: fixed; 
+      border-radius: 50%; 
+      filter: blur(90px); 
+      z-index: -1;
+      pointer-events: none; /* Supaya tidak mengganggu klik */
+    }
+    .glow-1 { width: 400px; height: 400px; background: rgba(37, 99, 235, 0.12); top: -100px; left: -100px; }
+    .glow-2 { width: 500px; height: 500px; background: rgba(34, 197, 94, 0.08); bottom: -150px; right: -100px; }
 
-.sidebar h2{
-  text-align:center;
-  margin-bottom:25px;
-  color:#ff69b4;
-  letter-spacing: 2px;
-}
+    /* --- Login Page Modern Glassmorphism --- */
+    #loginPage { width:100%; height:100vh; display:flex; justify-content:center; align-items:center; padding: 20px; background: linear-gradient(135deg,#0f2027,#203a43,#2c5364); position: relative; overflow: hidden; }
+    
+    .login-box { 
+      background: rgba(255, 255, 255, 0.1); 
+      backdrop-filter: blur(25px); 
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.2); 
+      width: 100%;
+      max-width: 420px; 
+      padding: 40px 30px; 
+      border-radius: 24px; 
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3); 
+      text-align: center; 
+      color: white; 
+      position: relative; 
+      z-index: 10; 
+    }
+    .login-box h1 { margin-bottom:8px; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2); color: white; }
+    .login-box p { color: rgba(255,255,255,0.75); font-size: 13.5px; margin-bottom: 30px; }
+    
+    .role-selector { display: flex; gap: 12px; margin-bottom: 25px; background: rgba(0,0,0,0.15); padding: 6px; border-radius: 14px; }
+    .role-btn { flex: 1; padding: 12px; border: none; border-radius: 10px; background: transparent; color: rgba(255,255,255,0.7); font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 13.5px; }
+    .role-btn.active { background: white; color: #203a43; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+    
+    #manualForm input { display: block; background: rgba(255, 255, 255, 0.95) !important; color: #0f172a !important; border: 1px solid #cbd5e1; font-weight: 500; }
+    #manualForm input::placeholder { color: #94a3b8 !important; }
+    
+    input, select { width:100%; padding:14px; margin-top:10px; border:1px solid rgba(0,0,0,0.08); border-radius:12px; background: rgba(255,255,255,0.8); color: var(--text-main); font-size: 14px; transition: all 0.3s; }
+    input:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); background: white; }
+    
+    #manualForm { width: 100%; display: block; clear: both; }
+    #groupInputMhs, #groupInputDosen { width: 100%; display: block; margin-bottom: 10px; }
 
-.sidebar a{
-  display:block;
-  padding:12px;
-  margin:8px 0;
-  border-radius:10px;
-  cursor:pointer;
-  transition:0.3s;
-  text-decoration: none;
-  color: rgba(255,255,255,0.7);
-}
+    /* --- Layout Utama Dashboard --- */
+    .sidebar { 
+      width: 260px; height: 100vh; 
+      background: var(--glass-bg); 
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      border-right: 1px solid var(--glass-border);
+      position: fixed; left: 0; top: 0; padding: 30px 20px; 
+      color: var(--text-main); transition: all 0.3s ease; z-index: 100;
+    }
+    .sidebar h2 { margin-bottom:5px; text-align:center; color: var(--primary); font-weight: 700; font-size: 24px; }
+    .sidebar ul { list-style:none; margin-top:30px; display: flex; flex-direction: column; gap: 8px; }
+    .sidebar ul li { padding: 14px 18px; background: transparent; border-radius: 12px; cursor: pointer; font-size: 14.5px; font-weight: 500; display: flex; align-items: center; gap: 12px; transition: all 0.3s; color: var(--text-muted); }
+    .sidebar ul li:hover { background: rgba(255,255,255,0.5); color: var(--primary); transform: translateX(4px); }
+    .sidebar ul li.active { background: white; color: var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.04); font-weight: 600; }
+    
+    .main { margin-left: 280px; padding: 30px 40px 30px 20px; width: calc(100% - 280px); transition: all 0.3s; }
+    
+    .navbar { 
+      background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      padding: 15px 25px; border-radius: 16px; border: 1px solid var(--glass-border);
+      display: flex; justify-content: space-between; align-items: center; box-shadow: var(--glass-shadow); color: var(--text-main); 
+    }
+    .navbar h1 { font-size: 18px; color: var(--text-main); font-weight: 600; }
+    
+    /* --- Card Modern Glassmorphism --- */
+    .card { 
+      background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border); border-radius: 20px; padding: 28px; margin-top: 24px; 
+      box-shadow: var(--glass-shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; color: var(--text-main); 
+    }
+    .card h2 { color: var(--text-main); margin-bottom: 12px; font-size: 20px; font-weight: 600; }
+    .card p { color: var(--text-muted); font-size: 14px; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(31, 38, 135, 0.1); }
+    
+    /* --- Tombol Modern --- */
+    button { padding: 12px 22px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top:10px; }
+    button:active { transform: scale(0.97); }
+    
+    .btn { background: var(--primary); color: white; width: 100%; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+    .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-alt { background: #64748b; color: white; width: 100%; box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2); }
+    .btn-alt:hover { background: #475569; }
+    .btn-success { background: var(--success); color: white; width: 100%; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); }
+    .btn-success:hover { background: var(--success-hover); }
+    .btn-edit { background: #fef3c7; color: #b45309; padding: 6px 14px; font-size: 12px; border-radius: 6px; }
+    .btn-edit:hover { background: #fde68a; }
+    .btn-delete { background: #fee2e2; color: #b91c1c; padding: 6px 14px; font-size: 12px; border-radius: 6px; }
+    .btn-delete:hover { background: #fecaca; }
+    .logout { background: var(--danger); color: white; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15); }
+    .logout:hover { background: var(--danger-hover); }
+    
+    /* --- Tabel Clean --- */
+    .table-responsive { overflow-x: auto; border-radius: 14px; margin-top: 20px; border: 1px solid rgba(0,0,0,0.05); }
+    table { width:100%; border-collapse:collapse; background: rgba(255,255,255,0.4); font-size: 14px; }
+    thead th { background: rgba(255,255,255,0.7); color: var(--text-muted); font-weight: 600; text-align: left; padding: 16px; border-bottom: 2px solid rgba(0,0,0,0.05); text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; text-align: center; }
+    tbody td { padding: 16px; border-bottom: 1px solid rgba(0,0,0,0.04); color: var(--text-main); text-align:center; font-weight: 500; background: rgba(255,255,255,0.2); }
+    tbody tr:hover td { background: rgba(255,255,255,0.6); }
+    
+    /* --- Statistik Grid --- */
+    .stats { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:20px; margin-top:24px; }
+    .stat-box { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); padding:22px; border-radius:18px; box-shadow: var(--glass-shadow); text-align:center; }
+    .stat-box h3 { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-box h1 { color: var(--primary); margin-top:6px; font-size: 34px; font-weight: 700; }
+    .rank-item { display:flex; justify-content:space-between; align-items: center; padding:14px 10px; border-bottom:1px solid rgba(0,0,0,0.05); color: var(--text-main); transition: 0.2s; }
+    .rank-item:hover { background: rgba(255,255,255,0.3); border-radius: 8px; }
+    .rank-item small { color: var(--text-muted); font-size: 12px; }
+    
+    /* --- Chatbox Premium UI --- */
+    .chat-box { border: 1px solid rgba(0,0,0,0.05); border-radius: 14px; height: 340px; overflow-y: auto; padding: 18px; background: rgba(255,255,255,0.5); margin-bottom: 15px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+    .chat-msg { padding: 12px 16px; border-radius: 16px; max-width: 80%; font-size: 13.5px; line-height: 1.5; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+    .chat-msg.bot { background: white; color: var(--text-main); align-self: flex-start; border: 1px solid rgba(0,0,0,0.03); border-top-left-radius: 4px; }
+    .chat-msg.user { background: var(--primary); color: white; align-self: flex-end; border-top-right-radius: 4px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15); }
+    
+    .flex-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    
+    /* --- Dark Mode --- */
+    .dark { 
+      background: var(--dark-bg); color:#f8fafc; 
+      --text-main: #f8fafc; --text-muted: #94a3b8;
+      --glass-bg: rgba(30, 41, 59, 0.45); --glass-border: rgba(255, 255, 255, 0.08);
+    }
+    .dark .bg-glow { opacity: 0.05; }
+    .dark .navbar { background: var(--glass-bg); color:white; }
+    .dark .navbar h1 { color: white; }
+    .dark .card { background: var(--dark-card); color:#f8fafc; border-color: var(--glass-border); }
+    .dark .card h2 { color: white; }
+    .dark .card p { color: #cbd5e1; }
+    .dark .stat-box { background: var(--dark-card); }
+    .dark .stat-box h1 { color: #60a5fa; }
+    .dark table th { background: rgba(15, 23, 42, 0.6); color: #e2e8f0; border-color: rgba(255,255,255,0.05); }
+    .dark table td { background: rgba(30, 41, 59, 0.3); color:#f8fafc; border-color: rgba(255,255,255,0.05); }
+    .dark tbody tr:hover td { background: rgba(255,255,255,0.05); }
+    .dark input, .dark select { background: rgba(15, 23, 42, 0.6); color:white; border:1px solid rgba(255,255,255,0.1); }
+    .dark .sidebar { background: rgba(15, 23, 42, 0.7); border-right: 1px solid rgba(255,255,255,0.05); }
+    .dark .sidebar h2 { color: #60a5fa; }
+    .dark .sidebar ul li:hover { background: rgba(255,255,255,0.05); color: #60a5fa; }
+    .dark .sidebar ul li.active { background: #2563eb; color: white; }
+    .dark .rank-item { border-bottom: 1px solid rgba(255,255,255,0.05); color: white; }
+    .dark .rank-item:hover { background: rgba(255,255,255,0.05); }
+    .dark .chat-box { background: rgba(15, 23, 42, 0.4); border-color: rgba(255,255,255,0.05); }
+    .dark .chat-msg.bot { background: #1e293b; color: white; border-color: rgba(255,255,255,0.05); }
+    
+    #loadingOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.85); backdrop-filter: blur(8px); z-index:9999; justify-content:center; align-items:center; color:white; font-size:18px; font-weight:600; gap: 12px; }
 
-.sidebar a:hover,
-.sidebar a.active{
-  background:#ff1493;
-  color:white;
-  transform:translateX(6px);
-  box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
-}
-
-/* CONTENT AREA */
-.content{
-  flex:1;
-  padding:40px;
-  overflow-y:auto;
-  scroll-behavior: smooth;
-}
-
-/* CARD SYSTEM */
-.card{
-  display:none;
-  background:rgba(255,255,255,0.03);
-  border-radius:20px;
-  padding:30px;
-  text-align:center;
-  backdrop-filter:blur(15px);
-  box-shadow:0 10px 40px rgba(255,20,147,0.15);
-  animation:fade 0.6s ease-out;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.active{display:block;}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* PROFILE IMAGE */
-img{
-  width:140px;
-  height:140px;
-  object-fit:cover;
-  border-radius:50%;
-  border:3px solid #ff1493;
-  box-shadow:0 0 25px rgba(255, 20, 147, 0.5);
-  margin-bottom:15px;
-}
-
-h1{ color:#ff69b4; margin-bottom:10px; }
-
-/* BIODATA BOX */
-.biodata-text {
-  text-align: left;
-  margin: 20px auto;
-  max-width: 500px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 15px;
-  line-height: 2;
-  border-left: 4px solid #ff1493;
-}
-
-/* EDUCATION GRID & MAPS */
-.edu-item {
-  background: rgba(255,255,255,0.05);
-  border-radius: 15px;
-  padding: 15px;
-  margin-bottom: 25px;
-  transition: 0.3s;
-}
-
-.edu-item:hover {
-  background: rgba(255,255,255,0.08);
-}
-
-.edu-item h3 { color: #ff69b4; margin-bottom: 10px; }
-
-.map-frame {
-  width: 100%;
-  height: 150px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 20, 147, 0.3);
-  margin-top: 10px;
-}
-
-/* SKILLS */
-.skill{ margin:15px 0; text-align:left; }
-.bar{ background:#222; border-radius:20px; overflow:hidden; }
-.fill{ height:10px; background:linear-gradient(90deg,#ff1493,#ff69b4); }
-
-/* GRID PROJECTS */
-.grid-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  margin-top:20px;
-}
-
-.box{
-  background:rgba(255,255,255,0.05);
-  padding:25px;
-  border-radius:15px;
-  border:1px solid rgba(255,255,255,0.1);
-  transition: 0.3s;
-}
-
-.box:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 20px #ff1493;
-}
-
-/* BUTTONS */
-button{
-  margin-top:20px;
-  padding:12px 30px;
-  border:none;
-  background:linear-gradient(45deg,#ff1493,#ff69b4);
-  color:white;
-  border-radius:25px;
-  cursor:pointer;
-  font-weight: 600;
-  transition:0.3s;
-}
-
-button:hover{ transform:scale(1.05); box-shadow:0 0 15px #ff1493; }
-
-/* SPARKLE ANIMATION */
-.sparkle{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:#ff69b4;
-  border-radius:50%;
-  pointer-events: none;
-  animation:spark 3s linear infinite;
-}
-
-@keyframes spark{
-  0%{opacity:0;transform:translateY(0);}
-  50%{opacity:1;}
-  100%{opacity:0;transform:translateY(-100px);}
-}
-
-/* SOCIAL BUTTONS */
-.btn{
-  display:block;
-  margin:10px auto;
-  width:250px;
-  padding:12px;
-  border-radius:25px;
-  text-decoration:none;
-  color:white;
-  font-weight:600;
-  transition:0.3s;
-}
-.wa{background:#25D366;}
-.ig{background:#E1306C;}
-.tt{background:#000;}
-</style>
+    /* --- Responsive Phone --- */
+    @media (max-width: 992px) {
+      .main { margin-left: 0; padding: 20px !important; width: 100%; }
+      .sidebar { transform: translateX(-100%); width: 260px; box-shadow: 10px 0 30px rgba(0,0,0,0.1); }
+      .sidebar.show { transform: translateX(0); }
+      .card { padding: 20px !important; margin-top: 15px !important; }
+      .login-box { width: 100% !important; margin: 0 auto; }
+      .flex-grid { grid-template-columns: 1fr; gap: 15px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+    }
+	
+    @media print {
+      body * { visibility: hidden; }
+      #certificateBox, #certificateBox * { visibility: visible; }
+      #certificateBox { position: absolute; left: 0; top: 0; width: 100%; border: none; }
+    }
+  </style>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
-
 <body>
 
-<div class="sidebar">
-  <h2>💗 Nana</h2>
-  <a onclick="showPage('beranda',this)" id="link-beranda" class="active">Beranda</a>
-  <a onclick="showPage('tentang',this)" id="link-tentang">Tentang</a>
-  <a onclick="showPage('pendidikan',this)" id="link-pendidikan">Pendidikan</a>
-  <a onclick="showPage('keahlian',this)" id="link-keahlian">Keahlian</a>
-  <a onclick="showPage('projek',this)" id="link-projek">Projek</a>
-  <a onclick="showPage('kontak',this)" id="link-kontak">Kontak</a>
+<div class="bg-glow glow-1"></div>
+<div class="bg-glow glow-2"></div>
+
+<div id="loadingOverlay">⏳ Sinkronisasi Cloud Google Sheets... Mohon Tunggu ...</div>
+
+<div id="loginPage">
+  <div class="login-box">
+    <h1>Academic Log Unigha</h1>
+    <p id="instruksiLogin">Selamat datang! Silakan pilih peran masuk</p>
+    
+    <div class="role-selector">
+      <button id="btnMhs" class="role-btn active" onclick="pilihPeran('mahasiswa')">🧑‍🎓 Mahasiswa</button>
+      <button id="btnDosen" class="role-btn" onclick="pilihPeran('admin')">👨‍🏫 Admin / Dosen</button>
+    </div>
+    
+    <div id="manualForm">
+      <div id="groupInputMhs">
+        <input type="text" id="username" placeholder="Masukkan NIM Kamu">
+      </div>
+      
+      <div id="groupInputDosen" style="display: none;">
+        <input type="text" id="adminUser" placeholder="Username Administrator">
+        <input type="password" id="password" placeholder="Kata Sandi Rahasia Dosen">
+      </div>
+      
+      <button class="btn" style="background: var(--warning); color: #142634; margin-top: 20px; box-shadow: 0 4px 15px rgba(255,170,0,0.2);" onclick="loginManual()">Masuk Ke Sistem</button>
+    </div>
+  </div>
 </div>
 
-<div class="content">
-
-  <div id="beranda" class="card active">
-    <img src="foto.jpg"  alt="Foto Nana">
-    <h1>Noor Qurratul Aina</h1>
-    <p>universitas jabal ghafur, pidie </p>
-    <button onclick="showPage('tentang')">Masuk →</button>
+<div id="dashboardPage" style="display:none;">
+  <div class="sidebar" id="sidebar">
+    <h2>Academic Log Unigha</h2>
+    <p style="text-align:center; color: var(--text-muted); font-size: 12px; border-bottom:1px solid rgba(0,0,0,0.06); padding-bottom:15px;">Smart Academic Assessment System</p>
+    <ul>
+      <li id="menu-dashboard" class="active" onclick="showDashboard()">🏠 <span>Dashboard</span></li>
+      <li id="menu-dataNilai" onclick="showDataNilai()">📚 <span>Penilaian Utama</span></li>
+      <li id="menu-chatbot" onclick="showChatbot()">🤖 <span>Ghafur Assistant AI</span></li>
+      <li id="menu-sertifikat" onclick="showSertifikat()">🏅 <span>Sertifikat</span></li>
+      <li id="menu-pengaturan" onclick="showPengaturan()">⚙️ <span>Pengaturan</span></li>
+    </ul>
   </div>
 
-<div id="tentang" class="card">
-    <h1>Tentang Saya</h1>
-    <div class="grid-container" style="text-align: left; align-items: start;">
-      
-      <div class="biodata-text" style="margin: 0; max-width: 100%;">
-        ✨ <b>Nama:</b> Noor Qurratul Aina<br>
-        📅 <b>Tgl Lahir:</b> 21 September 2006<br>
-        🏠 <b>Alamat:</b> Lueng Putu, Pidie Jaya, Aceh<br>
-        🎓 <b>Status:</b> Mahasiswa Teknik Informatika
-        <p style="margin-top: 15px; line-height: 1.5; font-size: 0.9em; color: rgba(255,255,255,0.8);">
-          Saya menyukai desain web dan terus belajar teknologi baru untuk menciptakan pengalaman digital yang menarik.
-        </p>
+  <div class="main">
+    <div class="navbar">
+      <h1 id="navbarTitle">Academic Log Unigha - Sistem Penilaian dan Monitoring Akademik</h1>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <p id="jam" style="font-weight:600; font-size: 13.5px; color: inherit;"></p>
+        <button onclick="darkMode()" style="padding: 8px 14px; margin: 0; background: #64748b; color:white; border-radius:8px; font-size: 12.5px;">Dark Mode</button>
+        <button class="logout" onclick="logout()" style="padding: 8px 14px; margin: 0; border-radius:8px; font-size: 12.5px;">Logout</button>
       </div>
-
-      <div class="edu-item" style="margin-bottom: 0;">
-        <h3 style="font-size: 1.1em; margin-bottom: 5px;">📍 Lokasi Saya</h3>
-        <p style="font-size: 0.8em; margin-bottom: 10px;">Lueng Putu, Pidie Jaya</p>
-        <iframe 
-          class="map-frame" 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15886.13628186175!2d96.1436445!3d5.4875323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3040379201537231%3A0x6334643c16a3a985!2sLueng%20Putu%2C%20Bandar%20Baru%2C%20Kabupaten%20Pidie%20Jaya%2C%20Aceh!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid" 
-          style="height: 200px;" 
-          allowfullscreen="" 
-          loading="lazy">
-        </iframe>
-      </div>
-
     </div>
-    <button onclick="showPage('pendidikan')" style="margin-top: 30px;">Next →</button>
-  </div>
 
-  <div id="pendidikan" class="card">
-    <h1>Riwayat Pendidikan</h1>
-    <div class="grid-container">
-      
-      <div class="edu-item">
-        <h3>MIN 7 Bandar Baru</h3>
-        <p>~sekolah dasar~</p>
-        <p>langkah pertama dalam dunia pendidikan formal. di sinilah semua cerita dan mimpi di mulai.</p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0!2d96.1!3d5.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMTgnMDAuMCJOIDk2wrAwNicwMC4wIkU!5e0!3m2!1sid!2sid!4v123456789" allowfullscreen="" loading="lazy"></iframe>
+    <div id="dashboardContent">
+      <div class="stats">
+        <div class="stat-box"><h3>Total Mhs</h3><h1 id="totalMahasiswa">0</h1></div>
+        <div class="stat-box"><h3>Rata-rata Kelas</h3><h1 id="rataNilai">0</h1></div>
+        <div class="stat-box"><h3>Nilai Tertinggi</h3><h1 id="nilaiTertinggi">0</h1></div>
+        <div class="stat-box"><h3>Peringkat Kamu</h3><h1 id="rankSaya">-</h1></div>
       </div>
-
-      <div class="edu-item">
-        <h3>SMPS Daruss'adah</h3>
-        <p>~Sekolah dasar menengah~</p>
-        <p>saya melanjutkan pendidikan ke pesantren. dan di masa-masa itulah saya membentuk karakter dan kepribadian diri.</p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0!2d96.15!3d5.32!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMTknMDAuMCJOIDk2wrAwOScwMC4wIkU!5e0!3m2!1sid!2sid!4v123456789" allowfullscreen="" loading="lazy"></iframe>
+      <div class="card">
+        <h2>🏆 Ranking Mahasiswa Otomatis</h2>
+        <div id="topRankList" style="margin-top:10px;"></div>
       </div>
-
-      <div class="edu-item">
-        <h3>SMAS Tautiah Arongan</h3>
-        <p>~Sekolah Menengah Atas~</p>
-        <p>dan saya melanjutkan lagi pendidikan ke pesantren yang lebih tinggi guna menambah wawasan,dan mempersiapkan diri untuk masa depan yang lebih baik. </p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0!2d96.08!3d5.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMTcnMDAuMCJOIDk2wrAwNScwMC4wIkU!5e0!3m2!1sid!2sid!4v123456789" allowfullscreen="" loading="lazy"></iframe>
+      <div class="card">
+        <h2>📊 Grafik Performa Akademik</h2>
+        <div id="chartContainer" style="margin-top: 15px; position: relative; height: 260px;"><canvas id="myChart"></canvas></div>
       </div>
-
-      <div class="edu-item">
-        <h3>Univ. Jabal Ghafur</h3>
-        <p>~Perguruan Tinggi (Teknik Informatika)~</p>
-        <p> memulai perjalanan baru dalam dunia perkuliahan, dan aktif dalam kegiatan organisasi seperti sanggar,dan aubade. dan saya juga mengembangkan kemampuan dalmbidang informatika dan teknologi.</p>
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.2166!2d95.9529!3d5.3783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30403759796e6d01%3A0x47f2022722b51239!2sUniversitas%20Jabal%20Ghafur!5e0!3m2!1sid!2sid!4v1620000000000" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-
     </div>
-    <button onclick="showPage('keahlian')">Next →</button>
-  </div>
 
-  <div id="keahlian" class="card">
-    <h1>Keahlian</h1>
-    <div class="skill"><p>HTML</p><div class="bar"><div class="fill" style="width:90%"></div></div></div>
-    <div class="skill"><p>CSS</p><div class="bar"><div class="fill" style="width:85%"></div></div></div>
-    <div class="skill"><p>JavaScript</p><div class="bar"><div class="fill" style="width:70%"></div></div></div>
-    <button onclick="showPage('projek')">Next →</button>
-  </div>
-
-  <div id="projek" class="card">
-    <h1>Projek Saya</h1>
-    <div class="grid-container">
-      <a href="https://noorqurratulaina-ai.github.io/Keina-Beauty/" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="box">
-          <h3>menyediakan berbagai kosmetik </h3>
-          <p> keinabeauty🎀💄.</p>
-          <small style="color: #ff69b4;">Lihat Demo →</small>
+    <div id="dataNilaiContent" style="display:none;">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 15px;">
+          <h2 id="tableTitle">Data Penilaian Mahasiswa</h2>
+          <div id="filterTools" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <select id="filterGrade" onchange="tampilkanDataTabel()" style="width: 130px; margin: 0; padding: 8px 12px; height: 38px; font-size: 13px;">
+              <option value="ALL">Semua Grade</option>
+              <option value="A">Grade A</option>
+              <option value="B">Grade B</option>
+              <option value="C">Grade C</option>
+              <option value="D/E">Grade D/E</option>
+            </select>
+            <input type="text" id="search" placeholder="🔍 Cari nama/NIM..." onkeyup="tampilkanDataTabel()" style="width: 160px; margin: 0; padding: 8px 12px; height: 38px; font-size: 13px;">
+            <button class="btn" onclick="ambilDataCloud()" style="background: var(--primary); color: white; padding:8px 14px; margin:0; font-size:13px; border-radius:8px; height: 38px; width: auto;">🔄 Refresh Sheet</button>
+            <button id="btnExportExcel" class="btn" onclick="exportKeCSV()" style="background: var(--success); color: white; padding:8px 14px; margin:0; font-size:13px; border-radius:8px; height: 38px; width: auto;">📥 Excel (CSV)</button>
+          </div>
         </div>
-      </a>
-      <div class="box">
-      <a href="https://noorqurratulaina-ai.github.io/healtypoint/" target="_blank" style="text-decoration: none; color: inherit;">
-        <h3>menerima Konsultasi kepada masyarakat umum</h3>
-        <p>kolsultasi secara online🏥.</p>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th id="thRank">Rank</th><th>NIM</th><th>Nama</th><th>Tugas</th><th>UTS</th><th>UAS</th><th>Akhir (Grade)</th><th>Status</th><th id="thAksi">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="dataTable"></tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <button onclick="showPage('kontak')">Next →</button>
-  </div>
 
-  <div id="kontak" class="card">
-    <h1>Hubungi Saya</h1>
-    <div class="social">
-      <a href="https://wa.me/081265030340" target="_blank" class="btn wa">💬 WhatsApp</a>
-      <a href="https://instagram.com/noorqurratulaina__" target="_blank" class="btn ig">📷 Instagram</a>
-      <a href="https://www.tiktok.com/@noorqurratulaina" target="_blank" class="btn tt">🎵 TikTok</a>
+    <div id="chatbotContent" style="display:none;">
+      <div class="card" style="max-width: 700px; margin: 20px auto 0 auto;">
+        <h2>🤖 Ghafur Assistant AI</h2>
+        <hr style="margin: 15px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.06);">
+        <div class="chat-box" id="chatContainerBox">
+          <div class="chat-msg bot" id="botWelcomeMsg">Halo! Saya asisten AI akademik pintar Unigha. Kamu bisa cek simulasi nilai di sini. Coba ketik: <b>"Target 85"</b> atau <b>"Mau nilai 90"</b>, maka saya akan hitung minimal nilai UTS & UAS yang kamu butuhkan!</div>
+        </div>
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+          <button onclick="shortcutChat('Target 85')" style="padding: 6px 14px; font-size: 11.5px; margin: 0; background: rgba(0,0,0,0.05); color: var(--text-main); width: auto; border-radius: 20px; font-weight: 500;">🎯 Target 85</button>
+          <button onclick="shortcutChat('Apakah saya bisa lulus?')" style="padding: 6px 14px; font-size: 11.5px; margin: 0; background: rgba(0,0,0,0.05); color: var(--text-main); width: auto; border-radius: 20px; font-weight: 500;">🎓 Prediksi Lulus</button>
+          <button onclick="shortcutChat('Gimana rumus bobot nilainya?')" style="padding: 6px 14px; font-size: 11.5px; margin: 0; background: rgba(0,0,0,0.05); color: var(--text-main); width: auto; border-radius: 20px; font-weight: 500;">📋 Rumus Bobot</button>
+        </div>
+
+        <div style="display:flex; gap:8px;">
+          <input type="text" id="chatInput" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') kirimChat()" style="margin:0;">
+          <button class="btn" onclick="kirimChat()" style="margin:0; width:100px; border-radius: 12px;">Kirim</button>
+        </div>
+      </div>
     </div>
-    <button onclick="showPage('beranda')">Kembali ke Awal</button>
-  </div>
 
-</div>
+    <div id="pengaturanContent" style="display:none;">
+      <div id="adminSettingsView" style="display:none;">
+        <div class="flex-grid">
+          <div class="card">
+            <h2>➕ Form Tambah Mahasiswa Baru Ke Cloud</h2>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.06);">
+            <input type="text" id="newNIM" placeholder="NPM / NIM Mahasiswa">
+            <input type="text" id="newNama" placeholder="Nama Lengkap Mahasiswa">
+            <input type="number" id="newTugas" placeholder="Nilai Tugas (0-100)">
+            <input type="number" id="newUTS" placeholder="Nilai UTS (0-100)">
+            <input type="number" id="newUAS" placeholder="Nilai UAS (0-100)">
+            <button class="btn-success" onclick="tambahMahasiswaCloud()" style="margin-top:15px; border-radius: 12px; padding: 14px;">🚀 Simpan Mahasiswa Ke Cloud Sheet</button>
+          </div>
+          <div class="card">
+            <h2>⚙️ Aturan Rumus & Shortcut</h2>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.06);">
+            <div style="background:rgba(37, 99, 235, 0.08); padding:14px; border-radius:12px; border:1px solid rgba(37, 99, 235, 0.15); margin-bottom:15px; text-align: center;">
+              <code style="font-family: monospace; color: #b91c1c; font-weight: bold; font-size: 13.5px;">Score = (Tugas × 30%) + (UTS × 30%) + (UAS × 40%)</code>
+            </div>
+            <button class="btn-alt" style="margin-bottom: 8px; border-radius: 10px;" onclick="window.open('https://docs.google.com/spreadsheets/d/11Pn4I4ikdnX1R7WfwefewXzm73Gwu2BQwA7cZ0_pBMo/edit?usp=sharing', '_blank')">🟩 Buka Google Sheets Utama</button>
+            <button class="btn-alt" style="background:#475569; border-radius: 10px;" onclick="alert('Backup Berhasil! Data Cloud tersimpan aman, beb!')">📥 Cadangkan Sistem Database</button>
+          </div>
+        </div>
+      </div>
+      <div id="mahasiswaSettingsView" style="display:none;">
+        <div class="card" style="text-align: center; padding: 50px 20px; border-radius: 20px;">
+          <h2 style="color: var(--danger);">🔒 Akses Terbatas</h2>
+          <p style="color: var(--text-muted); margin-top: 10px; font-size:14px;">Maaf, halaman Pengaturan Konfigurasi Database hanya bisa diakses oleh akun Administrator utama.</p>
+        </div>
+      </div>
+    </div>
 
+    <div id="sertifikatContent" style="display:none;">
+      <div class="card">
+        <h2>🏅 Sertifikat Akademik Digital</h2>
+        <div id="certificateBox" style="margin-top:20px;padding:50px;background:linear-gradient(135deg,#fffdf5,#fef3c7);border:8px double #f59e0b;border-radius:20px;text-align:center; color: #1e293b;">
+          </div>
+        <button class="btn-success" onclick="window.print()" style="margin-top:20px; width: auto; padding: 12px 30px; border-radius: 10px;">
+          🖨 Cetak Sertifikat PDF
+        </button>
+      </div>
+    </div>
+
+  </div> </div> 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-function showPage(pageId, element) {
-  // 1. Sembunyikan semua card
-  document.querySelectorAll('.card').forEach(card => {
-    card.classList.remove('active');
-  });
+// Logic JavaScript 
+const URL_API_SHEET ="https://script.google.com/macros/s/AKfycbxGT0Cf68NriwOp1Yo4_kcHvnse_AsOgq1fK-HXlltVkBAr1_1hwBQuSbmMdA74gixv/exec";
+
+let currentUserRole = "mahasiswa"; 
+let globalListMhs = [];
+let globalListAdmin = [];
+let dataTerload = false;
+let chart;
+
+function showLoading(status) { document.getElementById("loadingOverlay").style.display = status ? "flex" : "none"; }
+
+function pilihPeran(peran) {
+  currentUserRole = peran;
+  document.getElementById("btnMhs").classList.remove("active");
+  document.getElementById("btnDosen").classList.remove("active");
   
-  // 2. Tampilkan card yang dipilih
-  const targetCard = document.getElementById(pageId);
-  if(targetCard) targetCard.classList.add('active');
-
-  // 3. Update status menu di sidebar
-  document.querySelectorAll('.sidebar a').forEach(link => {
-    link.classList.remove('active');
-  });
-
-  // Jika dipicu dari tombol sidebar (element ada)
-  if(element) {
-    element.classList.add('active');
+  if(peran === "mahasiswa") {
+    document.getElementById("btnMhs").classList.add("active");
+    document.getElementById("instruksiLogin").innerText = "Silakan masukkan nomor NIM untuk melihat portal nilai kamu";
+    document.getElementById("groupInputMhs").style.display = "block";
+    document.getElementById("groupInputDosen").style.display = "none";
   } else {
-    // Jika dipicu dari tombol "Next" (cari link sidebar yang sesuai)
-    const sidebarLink = document.getElementById('link-' + pageId);
-    if(sidebarLink) sidebarLink.classList.add('active');
+    document.getElementById("btnDosen").classList.add("active");
+    document.getElementById("instruksiLogin").innerText = "Silakan masukkan sandi khusus hak akses administrator";
+    document.getElementById("groupInputMhs").style.display = "none";
+    document.getElementById("groupInputDosen").style.display = "block";
   }
-  
-  // Scroll ke atas otomatis saat ganti halaman
-  document.querySelector('.content').scrollTop = 0;
 }
 
-/* Efek Sparkle */
-setInterval(() => {
-  const sparkle = document.createElement("div");
-  sparkle.className = "sparkle";
-  sparkle.style.left = Math.random() * 100 + "%";
-  sparkle.style.top = "95%";
-  document.body.appendChild(sparkle);
-  setTimeout(() => sparkle.remove(), 3000);
-}, 400);
-</script>
+function loginManual(){
+  if(currentUserRole === "admin") {
+    let admUser = document.getElementById("adminUser").value.trim().toLowerCase();
+    let admPass = document.getElementById("password").value.trim();
+    
+    // Cek apakah data admin dari cloud sudah selesai di-load atau belum
+    if (!globalListAdmin || globalListAdmin.length === 0) {
+      alert("⚠️ Data keamanan Admin belum selesai diunduh dari Cloud. Mohon tunggu 3 detik atau klik Refresh.");
+      return;
+    }
+    
+    // Cari akun yang cocok dengan input user
+    let adminDitemukan = globalListAdmin.find(a => {
+      if (!a || !a.username) return false;
+      return a.username === admUser && a.password === admPass;
+    });
+    
+    if(adminDitemukan) {
+      currentUserRole = "admin";
+      masukDashboard();
+    } else {
+      alert("❌ Username atau Kata Sandi Admin salah / tidak terdaftar di Google Sheets!");
+    }
+  } else {
+    let nimUser = document.getElementById("username").value.trim();
+    if(nimUser !== "") {
+      currentUserRole = nimUser.toUpperCase();
+      masukDashboard();
+    } else {
+      alert("❌ Harap isi kolom NIM kamu terlebih dahulu");
+    }
+  }
+}
+function masukDashboard() {
+  document.getElementById("loginPage").style.display = "none";
+  document.getElementById("dashboardPage").style.display = "block";
 
+  if(currentUserRole === "admin") {
+    document.getElementById("navbarTitle").innerText = "Academic Log Unigha - Sistem Penilaian dan Monitoring Akademik";
+    document.getElementById("filterTools").style.display = "flex"; 
+    document.getElementById("btnExportExcel").style.display = "inline-flex"; 
+    document.getElementById("thAksi").style.display = "table-cell";
+    document.getElementById("adminSettingsView").style.display = "block";
+    document.getElementById("mahasiswaSettingsView").style.display = "none";
+    document.getElementById("tableTitle").innerText = "Data Penilaian Mahasiswa";
+    document.getElementById("thRank").innerText = "Rank";
+  } else {
+    document.getElementById("navbarTitle").innerText = "Academic Log Unigha - Sistem Penilaian dan Monitoring Akademik";
+    document.getElementById("filterTools").style.display = "none"; 
+    document.getElementById("btnExportExcel").style.display = "none"; 
+    document.getElementById("thAksi").style.display = "none";
+    document.getElementById("adminSettingsView").style.display = "none";
+    document.getElementById("mahasiswaSettingsView").style.display = "block";
+    document.getElementById("tableTitle").innerText = "Detail Nilai Kamu";
+    document.getElementById("thRank").innerText = "Akses";
+  }
+  ambilDataCloud();
+}
+
+function ambilDataCloud() {
+    showLoading(true);
+    
+    // 1. Ambil data utama (Mahasiswa + Nilai)
+    fetch(URL_API_SHEET, { method: 'GET', mode: 'cors' })
+        .then(response => {
+            if (!response.ok) throw new Error("Gagal terhubung ke Cloud");
+            return response.json();
+        })
+        .then(data => {
+            globalListMhs = data.map(m => ({
+                rank: Number(m.Rank) || 0,
+                nim: String(m.NIM || ""),
+                nama: m.Nama || "",
+                tugas: Number(m["Nilai Tugas"]) || 0,
+                uts: Number(m["Nilai UTS"]) || 0,
+                uas: Number(m["Nilai UAS"]) || 0,
+                nilaiAkhir: Number(m["Nilai Akhir"]) || 0,
+                grade: m.Grade || "",
+                status: m.Status || ""
+            }));
+
+            dataTerload = true;
+            tampilkanDataTabel();
+            updateStatistik(globalListMhs);
+            updateTopRank([...globalListMhs].sort((a,b)=>b.nilaiAkhir-a.nilaiAkhir));
+            updateChart(globalListMhs);
+            tampilkanRankMahasiswa();
+            
+            // 2. SETELAH DATA MHS SELESAI, LANJUT AMBIL DATA ADMIN SECARA OTOMATIS
+            return fetch(URL_API_SHEET + "?aksi=GET_ADMIN", { method: 'GET', mode: 'cors' });
+        })
+        .then(resAdmin => resAdmin ? resAdmin.json() : [])
+        .then(dataAdmin => {
+            globalListAdmin = dataAdmin; // Menyimpan data akun admin dari Google Sheets
+            showLoading(false);
+        })
+        .catch(err => {
+            console.error("Sinkronisasi gagal:", err);
+            showLoading(false);
+            alert("Gagal ambil data dari Google Sheet!");
+        });
+}
+function tampilkanDataTabel() {
+  if (!dataTerload) return;
+  
+  let table = document.getElementById("dataTable");
+  let filterGrade = document.getElementById("filterGrade").value;
+  let searchTerm = document.getElementById("search").value.toLowerCase();
+  
+  let dataFiltered = [...globalListMhs].sort((a, b) => b.nilaiAkhir - a.nilaiAkhir);
+  
+  if (currentUserRole !== "admin") {
+    dataFiltered = dataFiltered.filter(m => m.nim === currentUserRole);
+  } else {
+    if (filterGrade !== "ALL") {
+      dataFiltered = dataFiltered.filter(m => m.grade === filterGrade);
+    }
+    if (searchTerm !== "") {
+      dataFiltered = dataFiltered.filter(m => 
+        m.nama.toLowerCase().includes(searchTerm) || 
+        m.nim.toLowerCase().includes(searchTerm)
+      );
+    }
+  }
+  
+  table.innerHTML = "";
+  
+  dataFiltered.forEach((m, index) => {
+    let row = table.insertRow();
+    row.innerHTML = `
+      <td>🏆 ${index + 1}</td>
+      <td>${m.nim || "-"}</td>
+      <td>${m.nama || "-"}</td>
+      <td>${m.tugas || 0}</td>
+      <td>${m.uts || 0}</td>
+      <td>${m.uas || 0}</td>
+      <td>${m.nilaiAkhir || 0} (${m.grade || "-"})</td>
+      <td>${m.status || "-"}</td>
+      <td class="aksi-col" style="${currentUserRole !== 'admin' ? 'display:none;' : ''}">
+        <button class="btn-edit" onclick="editMahasiswaCloud('${m.nim}')">Edit</button>
+        <button class="btn-delete" onclick="deleteMahasiswaCloud('${m.nim}')">Hapus</button>
+      </td>
+    `;
+  });
+}
+
+function isValidNilai(nilai) {
+    const num = parseFloat(nilai);
+    return !isNaN(num) && num >= 0 && num <= 100;
+}
+
+function tambahMahasiswaCloud() {
+  let nim = document.getElementById("newNIM").value.trim().toUpperCase();
+  let nama = document.getElementById("newNama").value.trim();
+  let tugas = document.getElementById("newTugas").value;
+  let uts = document.getElementById("newUTS").value;
+  let uas = document.getElementById("newUAS").value;
+
+  if (!nim || !nama) { 
+    alert("NIM & Nama wajib diisi beb!"); 
+    return; 
+  }
+
+  if (!isValidNilai(tugas) || !isValidNilai(uts) || !isValidNilai(uas)) {
+    alert("❌ Error: Pastikan nilai Tugas, UTS, dan UAS adalah angka antara 0 sampai 100!");
+    return; 
+  }
+
+  showLoading(true);
+
+  fetch(URL_API_SHEET, { 
+    method: "POST", 
+    body: JSON.stringify({ 
+      aksi: "TAMBAH", 
+      nim: nim, 
+      nama: nama, 
+      tugas: parseFloat(tugas), 
+      uts: parseFloat(uts), 
+      uas: parseFloat(uas) 
+    }) 
+  })
+  .then(r => r.json())
+  .then(res => {
+    if(res.status === "SUKSES") {
+      alert("Sukses menambah data ke Google Sheet!");
+      document.getElementById("newNIM").value = ""; 
+      document.getElementById("newNama").value = "";
+      document.getElementById("newTugas").value = ""; 
+      document.getElementById("newUTS").value = ""; 
+      document.getElementById("newUAS").value = "";
+      ambilDataCloud();
+    } else { 
+      showLoading(false); 
+      alert("Gagal menyimpan data!"); 
+    }
+  }).catch(() => {
+    showLoading(false);
+    alert("Terjadi kesalahan koneksi ke Cloud.");
+  });
+}
+
+function editMahasiswaCloud(nim) {
+  let mhs = globalListMhs.find(m => m.nim === nim);
+  if(!mhs) return;
+
+  let baruNama = prompt("Edit Nama Mahasiswa:", mhs.nama); if(baruNama === null) return; 
+  let baruTugas = prompt("Edit Nilai Tugas:", mhs.tugas);
+  let baruUTS = prompt("Edit Nilai UTS:", mhs.uts);
+  let baruUAS = prompt("Edit Nilai UAS:", mhs.uas);
+
+  if(!isValidNilai(baruTugas) || !isValidNilai(baruUTS) || !isValidNilai(baruUAS)) {
+     alert("Nilai harus angka 0-100!");
+     return;
+  }
+
+  showLoading(true);
+  fetch(URL_API_SHEET, { method: "POST", body: JSON.stringify({ aksi: "EDIT", nim: nim, nama: baruNama.trim()||mhs.nama, tugas: parseFloat(baruTugas), uts: parseFloat(baruUTS), uas: parseFloat(baruUAS) }) })
+    .then(r => r.json())
+    .then(res => { if(res.status === "SUKSES") { alert("Berhasil di-update di Google Sheets!"); ambilDataCloud(); } else { showLoading(false); alert("Gagal update!"); } })
+    .catch(() => showLoading(false));
+}
+
+function deleteMahasiswaCloud(nim) {
+  if(confirm(`Yakin menghapus NIM ${nim} dari Google Sheets beb?`)) {
+    showLoading(true);
+    fetch(URL_API_SHEET, { method: "POST", body: JSON.stringify({ aksi: "HAPUS", nim: nim }) })
+      .then(r => r.json())
+      .then(res => { if(res.status === "SUKSES") { alert("Data terhapus dari cloud!"); ambilDataCloud(); } else { showLoading(false); alert("Gagal hapus!"); } })
+      .catch(() => showLoading(false));
+  }
+}
+
+function exportKeCSV() {
+  if (globalListMhs.length === 0) return alert("Belum ada data untuk diunduh!");
+  
+  let csvContent = "data:text/csv;charset=utf-8,";
+  csvContent += "Rank,NIM,Nama,Nilai Tugas,Nilai UTS,Nilai UAS,Nilai Akhir,Grade,Status\n";
+  
+  let sorted = [...globalListMhs].sort((a, b) => b.nilaiAkhir - a.nilaiAkhir);
+  
+  sorted.forEach((m, index) => {
+    let row = [
+      index + 1,
+      `'${m.nim}`, 
+      m.nama,
+      m.tugas,
+      m.uts,
+      m.uas,
+      m.nilaiAkhir,
+      m.grade,
+      m.status
+    ].join(",");
+    csvContent += row + "\n";
+  });
+  
+  let encodedUri = encodeURI(csvContent);
+  let link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "Rekap_Nilai_EduTrackAI.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function updateTopRank(sortedList){
+  let container = document.getElementById("topRankList");
+  container.innerHTML = "";
+  if(sortedList.length === 0) return;
+
+  sortedList.slice(0,5).forEach((m,i)=>{
+    let medal = "🏅";
+    let gelar = i === 0 ? "Peringkat 1" : i === 1 ? "Peringkat 2" : i === 2 ? "Peringkat 3" : "Top " + (i+1);
+    if(i===0) medal="🥇";
+    else if(i===1) medal="🥈";
+    else if(i===2) medal="🥉";
+
+    container.innerHTML += `
+      <div class="rank-item">
+        <div>
+          ${medal} <b>${m.nama}</b><br>
+          <small>${m.nim} | ${gelar}</small>
+        </div>
+        <div><b>${m.nilaiAkhir}</b></div>
+      </div>
+    `;
+  });
+}
+
+function updateChart(listMhs){
+  let ctx = document.getElementById("myChart"); 
+  if(listMhs.length === 0) { if(chart) chart.destroy(); return; }
+  if(chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: "bar",
+    data: { labels: listMhs.map(m => m.nama), datasets: [{ label: "Nilai Akhir", data: listMhs.map(m => m.nilaiAkhir), backgroundColor: listMhs.map(m => m.nilaiAkhir >= 80 ? "#22c55e" : "#3b82f6"), borderRadius: 6 }] },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } } }
+  });
+}
+
+function updateStatistik(list) {
+  let total = list.length;
+  let rata = total > 0 ? (list.reduce((a, b) => a + b.nilaiAkhir, 0) / total).toFixed(1) : 0;
+  let max = total > 0 ? Math.max(...list.map(m => m.nilaiAkhir)).toFixed(1) : 0;
+  document.getElementById("totalMahasiswa").innerText = total;
+  document.getElementById("rataNilai").innerText = rata;
+  document.getElementById("nilaiTertinggi").innerText = max;
+}
+
+function tampilkanRankMahasiswa(){
+  if(currentUserRole === "admin") return;
+  let sorted = [...globalListMhs].sort((a,b)=>b.nilaiAkhir-a.nilaiAkhir);
+  let rank = sorted.findIndex(m => m.nim === currentUserRole) + 1;
+  document.getElementById("rankSaya").innerText = rank > 0 ? "#" + rank : "-";
+}
+
+function shortcutChat(kalimat) {
+  document.getElementById("chatInput").value = kalimat;
+  kirimChat();
+}
+
+function kirimChat() {
+  let inputEl = document.getElementById("chatInput"); 
+  let txt = inputEl.value.trim(); 
+  if(!txt) return;
+  
+  let container = document.getElementById("chatContainerBox"); 
+  container.innerHTML += `<div class="chat-msg user">${txt}</div>`; 
+  inputEl.value = "";
+  
+  let mhs = globalListMhs.find(m => m.nim === currentUserRole);
+
+  setTimeout(() => {
+    let response = "Maaf, aku kurang paham maksudnya. Kamu bisa tanya seperti: <i>'target 80'</i>, <i>'prediksi lulus'</i>, atau <i>'rumus bobot'</i>."; 
+    let lowTxt = txt.toLowerCase();
+    
+    let matchTarget = lowTxt.match(/(?:target|nilai|mau|pengen|bisa)\s*(\d+)/);
+
+    if (matchTarget) {
+      let targetAkhir = parseFloat(matchTarget[1]);
+
+      if (targetAkhir < 0 || targetAkhir > 100) {
+        response = "Rentang nilai itu dari 0 sampai 100 ya, jangan ngadi-ngadi ya pacarnya haechan! 💻";
+      } else if (currentUserRole === "admin") {
+        response = "Fitur simulasi target nilai ini khusus untuk akun mahasiswa, Admin tidak memiliki komponen nilai akademik.";
+      } else if (!mhs) {
+        response = "Data nilai kamu tidak ditemukan. Pastikan kamu sudah login dengan NIM yang terdaftar di Google Sheet.";
+      } else {
+        let kontribusiTugas = mhs.tugas * 0.3;
+        let sisaTarget = targetAkhir - kontribusiTugas;
+
+        if (sisaTarget <= 0) {
+          response = `Berdasarkan Nilai Tugas kamu yang sekarang (<b>${mhs.tugas}</b>), Nilai Akhir target <b>${targetAkhir}</b> sudah pasti tercapai bahkan jika nilai UTS dan UAS kamu 0! Hebat! 🎉`;
+        } else {
+          let butuhUtsUas = sisaTarget / 0.7;
+
+          if (butuhUtsUas > 100) {
+            response = `Waduh, untuk mendapat Nilai Akhir <b>${targetAkhir}</b>, kamu butuh nilai UTS & UAS sebesar <b>${butuhUtsUas.toFixed(1)}</b>. Secara matematis mustahil dicapai karena nilai maksimal adalah 100. Coba turunkan target sedikit ya! 🙏`;
+          } else {
+            response = `Untuk mengejar target Nilai Akhir <b>${targetAkhir}</b> dengan Nilai Tugas kamu yang sekarang (<b>${mhs.tugas}</b>), minimal kamu harus mendapatkan nilai:
+                        <br>• <b>UTS: ${butuhUtsUas.toFixed(1)}</b> (Bobot 30%)
+                        <br>• <b>UAS: ${butuhUtsUas.toFixed(1)}</b> (Bobot 40%)
+                        <br><br><i>Yuk bisa yuk, semangat belajarnya! 🚀</i>`;
+          }
+        }
+      }
+    }
+    else if(lowTxt.includes("prediksi") || lowTxt.includes("lulus")) {
+      if(currentUserRole === "admin") {
+        response = "Admin tidak memiliki nilai akademik, fitur ini khusus untuk mahasiswa.";
+      } else if(mhs) {
+        response = mhs.nilaiAkhir >= 70 ? 
+          `Keren, Nilai akhir kamu saat ini <b>${mhs.nilaiAkhir}</b>, status kamu sudah <b>Lulus</b>. Pertahankan ya!` : 
+          `Nilai akhir kamu saat ini <b>${mhs.nilaiAkhir}</b>. Kamu perlu tambahan <b>${(70 - mhs.nilaiAkhir).toFixed(1)}</b> poin lagi untuk mencapai batas aman kelulusan (70). Semangat!`;
+      } else {
+        response = "Maaf, data nilai kamu tidak ditemukan di sistem.";
+      }
+    } 
+    else if(lowTxt.includes("bobot") || lowTxt.includes("rumus")) response = "Aturan bobot penilaian di kampus ini: Tugas 30%, UTS 30%, dan UAS 40%.";
+    
+    container.innerHTML += `<div class="chat-msg bot">${response}</div>`; 
+    container.scrollTop = container.scrollHeight;
+  }, 400);
+}
+
+function darkMode() { document.body.classList.toggle("dark"); }
+function showDashboard() { switchPage("dashboardContent", "menu-dashboard"); }
+function showDataNilai() { switchPage("dataNilaiContent", "menu-dataNilai"); }
+function showChatbot() { switchPage("chatbotContent", "menu-chatbot"); }
+function showPengaturan() { switchPage("pengaturanContent", "menu-pengaturan"); }
+
+function switchPage(contentId, menuId) {
+  ["dashboardContent", "dataNilaiContent", "chatbotContent", "sertifikatContent", "pengaturanContent"].forEach(p => { document.getElementById(p).style.display = (p === contentId) ? "block" : "none"; });
+  ["menu-dashboard", "menu-dataNilai", "menu-chatbot", "menu-pengaturan", "menu-sertifikat"].forEach(m => {
+    let el = document.getElementById(m); if(el) { if(m === menuId) el.classList.add("active"); else el.classList.remove("active"); }
+  });
+  if (dataTerload && (contentId === "dashboardContent" || contentId === "dataNilaiContent")) tampilkanDataTabel();
+}
+
+function showSertifikat() {
+  switchPage("sertifikatContent", "menu-sertifikat");
+  let certBox = document.getElementById("certificateBox");
+
+  // 1. Validasi jika yang login adalah Admin
+  if (currentUserRole === "admin") {
+    certBox.innerHTML = "<h2>🔒 Sertifikat hanya dapat diunduh dan dilihat oleh Mahasiswa secara personal.</h2>";
+    return;
+  }
+
+  // 2. Cari data mahasiswa berdasarkan akun NIM yang sedang login (currentUserRole)
+  let mhs = globalListMhs.find(m => m.nim === currentUserRole);
+  if (!mhs) {
+    certBox.innerHTML = "<h2 style='color:red'>❌ Data mahasiswa tidak ditemukan. Silakan login ulang.</h2>";
+    return;
+  }
+
+  // 3. Batasi jika status mahasiswa TIDAK LULUS (Nilai < 70)
+  if (mhs.nilaiAkhir < 70) {
+    certBox.innerHTML = `<h2 style="color:red">❌ Sertifikat Belum Tersedia</h2>
+                         <p>Minimal nilai akhir 70 untuk mendapatkan sertifikat.</p><br>
+                         <h3>Nilai Akhir Kamu Saat Ini : ${mhs.nilaiAkhir.toFixed(1)}</h3>`;
+    return;
+  }
+
+  // 4. Generate Nomor Sertifikat dan Predikat secara otomatis
+  const nomorSertifikat = "EDU-" + new Date().getFullYear() + "-" + mhs.nim;
+  let predikat = mhs.nilaiAkhir >= 90 ? "PREDIKAT ISTIMEWA" : mhs.nilaiAkhir >= 80 ? "PREDIKAT SANGAT BAIK" : "PREDIKAT BAIK";
+  let badge = "🏆";
+  
+  const qrData = `🎓 SERTIFIKAT EDUTRACK AI\nNama : ${mhs.nama}\nNIM : ${mhs.nim}\nNilai : ${mhs.nilaiAkhir.toFixed(1)}\nGrade : ${mhs.grade}\nStatus : ${mhs.status}\n✅ SERTIFIKAT VALID`;
+  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(qrData);
+
+  // 5. Tampilkan desain preview Sertifikat di dalam halaman web kamu
+  certBox.innerHTML = `
+<div style="
+    max-width:900px;
+    margin:auto;
+    padding:50px;
+    border:12px solid #d4af37;
+    background:#fffdf7;
+    text-align:center;
+    font-family:'Times New Roman', serif;
+    position:relative;
+">
+
+    <h3 style="color:#64748b;margin:0;">
+        UNIVERSITAS JABAL GHAFUR
+    </h3>
+
+    <h2 style="color:#1e293b;margin-top:10px;">
+        ACADEMIC LOG UNIGHA
+    </h2>
+
+    <hr style="margin:20px 0;">
+
+    <h1 style="
+        color:#d97706;
+        font-size:48px;
+        letter-spacing:3px;
+        margin-bottom:20px;
+    ">
+        SERTIFIKAT PRESTASI
+    </h1>
+
+    <p style="font-size:18px;color:#475569;">
+        Diberikan Kepada
+    </p>
+
+    <h1 style="
+        font-size:42px;
+        color:#0f172a;
+        margin:20px 0;
+    ">
+        ${mhs.nama}
+    </h1>
+
+    <p style="font-size:18px;">
+        NIM : <b>${mhs.nim}</b>
+    </p>
+
+    <br>
+
+    <p style="max-width:700px;margin:auto;line-height:1.8;color:#334155;">
+        Sertifikat ini diberikan sebagai bentuk penghargaan atas
+        keberhasilan dalam menyelesaikan evaluasi akademik pada
+        Sistem Academic Log Unigha dengan hasil yang sangat baik.
+    </p>
+
+    <br>
+
+   <h2 style="color:#d97706;">
+    ${badge} ${predikat}
+</h2>
+
+<p style="
+    font-size:20px;
+    color:#475569;
+    margin:15px 0;
+">
+    Peringkat Akademik : <b>#${mhs.rank}</b>
+</p>
+
+<h1 style="color:#2563eb;">
+    Nilai Akhir : ${mhs.nilaiAkhir.toFixed(1)}
+</h1>
+
+    <h3>
+        Grade ${mhs.grade} | ${mhs.status}
+    </h3>
+
+    <br>
+
+    <p>
+        Nomor Sertifikat :
+        <b>${nomorSertifikat}</b>
+    </p>
+
+    <img src="${qrUrl}" width="140" alt="QR Sertifikat">
+
+    <p style="font-size:12px;color:#64748b;">
+        Scan QR untuk verifikasi sertifikat
+    </p>
+
+    <br><br>
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-end;
+        margin-top:40px;
+    ">
+
+        <div>
+            <p>
+                ${new Date().toLocaleDateString("id-ID",{
+                    day:"numeric",
+                    month:"long",
+                    year:"numeric"
+                })}
+            </p>
+        </div>
+
+        <div style="text-align:center;">
+            <p>Mengetahui,</p>
+            <br><br><br>
+            <b>Admin Academic Log</b>
+        </div>
+
+    </div>
+
+</div>
+`;
+
+  // 6. OTOMATIS KIRIM & SIMPAN LOG SERTIFIKAT INI KE GOOGLE SHEETS KAMU
+  fetch(URL_API_SHEET, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      "aksi": "TAMBAH_SERTIFIKAT",
+      "nim": mhs.nim,
+      "no_sertifikat": nomorSertifikat,
+      "predikat": predikat
+    })
+  })
+  .then(response => response.text())
+  .then(res => {
+    console.log("Log Sertifikat sukses dicatat ke cloud:", res);
+  })
+  .catch(err => {
+    console.error("Gagal mencatat log sertifikat ke cloud:", err);
+  });
+}
+
+function logout(){ location.reload(); }
+
+setInterval(() => {
+  let now = new Date();
+  let jamEl = document.getElementById("jam");
+  if(jamEl) jamEl.innerText = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + " | " + now.toLocaleTimeString('id-ID');
+}, 1000);
+
+window.onload = function() {
+    ambilDataCloud();
+
+    setTimeout(() => {
+        console.log("ADMIN:", globalListAdmin);
+    }, 5000);
+}
+</script>
 </body>
 </html>
